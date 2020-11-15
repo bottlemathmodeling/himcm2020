@@ -2,8 +2,8 @@ from django.shortcuts import render
 from .forms import SeqForm
 
 import numpy as np
-import tensorflow as tf
-from keras.models import load_model
+#import tensorflow as tf
+#from keras.models import load_model
 
 def one_hot_encode(seq, base_map):
     seq = seq.upper()
