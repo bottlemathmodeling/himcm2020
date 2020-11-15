@@ -12,8 +12,8 @@ def one_hot_encode(seq, base_map):
     return np.eye(4)[seq2]
 
 # Create your views here.
-one_bp_model = load_model('models/1bpins_NAS.h5')
-delfreq_model = load_model('models/delfreq_manual.h5')
+#one_bp_model = load_model('models/1bpins_NAS.h5')
+#delfreq_model = load_model('models/delfreq_manual.h5')
 
 def get_input_view(request):
     if request.method == 'POST':
@@ -23,14 +23,15 @@ def get_input_view(request):
             input_seq = form['input_seq'].value()
             input_seq = one_hot_encode(input_seq, 'ACGT')
             input_seq = np.reshape(input_seq, (1, 79, 4))
-            
-            one_bp_pred = one_bp_model.predict(input_seq)
-            one_bp_pred = one_bp_pred.flatten().tolist()[0] * 100
-            one_bp_pred = str(round(one_bp_pred, 2)) + ' %'
+            one_bp_pred = 1
+            delfreq_pred = 1
+            #one_bp_pred = one_bp_model.predict(input_seq)
+            #one_bp_pred = one_bp_pred.flatten().tolist()[0] * 100
+            #one_bp_pred = str(round(one_bp_pred, 2)) + ' %'
 
-            delfreq_pred = delfreq_model.predict(input_seq)
-            delfreq_pred = delfreq_pred.flatten().tolist()[0] * 100
-            delfreq_pred = str(round(delfreq_pred, 2)) + ' %'
+            #delfreq_pred = delfreq_model.predict(input_seq)
+            #delfreq_pred = delfreq_pred.flatten().tolist()[0] * 100
+            #delfreq_pred = str(round(delfreq_pred, 2)) + ' %'
 
             context = {
                 'form': SeqForm(),
